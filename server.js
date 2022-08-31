@@ -171,7 +171,7 @@ class movie {
       this.overview = item.overview;
       this.vote_average = item.vote_average;
       this.total_votes = item.vote_count;
-      this.image_url = item.poster_path;
+      this.image_url ="https://image.tmdb.org/t/p/w500" +item.poster_path;
       this.popularity = item.popularity;
       this.released_on = item.release_date;
 
