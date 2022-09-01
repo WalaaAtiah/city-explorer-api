@@ -12,9 +12,9 @@ const weatherkey = process.env.weatherkey;
 
 function getweathersHandler(req, res) {
     let { lat, lon, name } = req.query;
-    console.log(lat);
-    console.log(lon);
-    console.log(name);
+    // console.log(lat);
+    // console.log(lon);
+    // console.log(name);
     const URL = `http://api.weatherbit.io/v2.0/forecast/daily?key=${weatherkey}&lat=${lat}&lon=${lon}&cityName=${name}`;
   
     console.log("hi from getweathe");
@@ -23,11 +23,11 @@ function getweathersHandler(req, res) {
       .get(URL)
       .then((result) => {
         //do the things that dependent on the axios result
-        console.log("axios completed");
+        console.log("weather axios completed");
         let resultData = result.data.data.map((item) => {
           return new weather(item);
         });
-        console.log(resultData);
+        console.log("weather result",resultData);
         res.status(200).send(resultData);
       })
   

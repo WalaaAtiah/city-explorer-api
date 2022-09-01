@@ -7,6 +7,7 @@ server.use(cors()); // make the server opened for any request
 const axios = require("axios");
 
 const PORT = process.env.PORT || 3000; // http://localhost:3000/
+let myMoemory={};
 
 
 
@@ -18,20 +19,25 @@ function getmoviesHandler(req, res) {
     console.log("hi from movie");
   
     let { query } = req.query;
-    console.log(query);
+    console.log("move  quary",query);
     const URL = `https://api.themoviedb.org/3/search/movie?api_key=${moviekey}&query=${query}`;
   
-  
+   if (myMoemory[query]){
+    console.log("iam inside memory")
+     res.status(200).send(myMoemory[query])
+   }else{
+
     axios
       .get(URL)
       .then((result) => {
         //do the things that dependent on the axios result
-        console.log(result.data);
+        // console.log(result.data);
         let resultData=result.data.results.map(item=>{
           return new movie (item);
         })
         // console.log(resultData)
-  
+        myMoemory[query]=resultData;
+        // console.log('myMoemory' ,myMoemory)
         res.status(200).send(resultData);
       })
   
@@ -52,6 +58,12 @@ function getmoviesHandler(req, res) {
         this.released_on = item.release_date;
   
     }
+
+
+   }
+
+
+  
   }
 
 
