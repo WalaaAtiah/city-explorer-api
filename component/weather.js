@@ -7,6 +7,7 @@ server.use(cors()); // make the server opened for any request
 const axios = require("axios");
 
 const PORT = process.env.PORT || 3000; // http://localhost:3000/
+ 
 
 const weatherkey = process.env.weatherkey;
 
